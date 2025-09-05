@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/error"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:id="@+id/oops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/oops"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:id="@+id/cityNotFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city_not_found"
+        android:layout_below="@+id/oops"
+        android:layout_centerHorizontal="true"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cityNotFound"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/ok"
+        android:textColor="@color/white"
+        />
+
+</RelativeLayout>

@@ -76,4 +76,15 @@
         android:text="@string/santiago"
         android:layout_below="@+id/concepcionButton"
         android:layout_centerHorizontal="true"/>
+    <TextView
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:text="@string/version_number"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/santiagoButton" />
 </RelativeLayout>

@@ -22,7 +22,7 @@
         android:id="@+id/temp"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:text="17°"
+        android:text=""
         android:layout_above="@+id/current_min_and_max"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"/>

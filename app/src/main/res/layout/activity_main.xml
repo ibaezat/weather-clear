@@ -39,7 +39,7 @@
         android:background="@drawable/search_city_style"
         android:textSize="20sp" />
     <Button
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:id="@+id/chillanButton"
@@ -51,7 +51,7 @@
         app:backgroundTint="@null"
         android:layout_centerHorizontal="true" />
     <Button
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:id="@+id/concepcionButton"
@@ -64,7 +64,7 @@
         android:layout_below="@+id/chillanButton"
         android:layout_centerInParent="true"/>
     <Button
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:id="@+id/santiagoButton"

@@ -1,126 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Layout"
     android:background="@drawable/backgrounddark"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
-        android:textSize="25sp"
+        android:textSize="40sp"
         android:textColor="@color/white"
         android:id="@+id/cityName"
-        android:background="#40000000"
-        android:padding="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loading"
-        android:layout_above="@+id/icon"
-        android:layout_centerHorizontal="true"/>
-    <TextView
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:id="@+id/tempTitle"
-        android:background="#40000000"
-        android:padding="2dp"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:text="Actual"
         android:layout_above="@+id/temp"
         android:layout_centerHorizontal="true"
+        app:drawableLeftCompat="@drawable/location_icon" />
+    <TextView
+        android:textSize="140sp"
+        android:textColor="@color/white"
+        android:id="@+id/temp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="17°"
+        android:layout_above="@+id/current_min_and_max"
+        android:layout_centerHorizontal="true"
         android:textAlignment="center"/>
+    <TextView
+        android:textSize="40sp"
+        android:textColor="@color/white"
+        android:id="@+id/current_min_and_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/loading"
+        android:layout_centerInParent="true"/>
     <TextView
         android:textSize="30sp"
         android:textColor="@color/white"
-        android:id="@+id/temp"
-        android:background="#40000000"
-        android:padding="2dp"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_above="@+id/weather"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"/>
-    <TextView
-        android:textSize="25sp"
-        android:textColor="@color/white"
         android:id="@+id/weather"
-        android:background="#40000000"
-        android:padding="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/loading"
+        android:layout_below="@+id/current_min_and_max"
         android:layout_centerInParent="true"/>
-    <TextView
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:id="@+id/weather_desc"
-        android:background="#40000000"
-        android:padding="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/loading"
-        android:layout_below="@+id/weather"
-        android:layout_centerInParent="true"/>
-    <TextView
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:id="@+id/temp_minTitle"
-        android:background="#40000000"
-        android:padding="2dp"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:text="@string/min"
-        android:layout_toLeftOf="@+id/icon"
-        android:layout_above="@+id/temp_min"
-        android:textAlignment="center"/>
-    <TextView
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:id="@+id/temp_min"
-        android:background="#40000000"
-        android:padding="2dp"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:text=""
-        android:layout_toLeftOf="@+id/icon"
-        android:layout_above="@+id/temp"
-        android:textAlignment="center"/>
-    <TextView
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:id="@+id/temp_maxTitle"
-        android:background="#40000000"
-        android:padding="2dp"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="@string/max"
-        android:layout_toRightOf="@+id/icon"
-        android:layout_above="@+id/temp_max"
-        android:textAlignment="center"/>
-    <TextView
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:id="@+id/temp_max"
-        android:background="#40000000"
-        android:padding="2dp"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text=""
-        android:layout_toRightOf="@+id/icon"
-        android:layout_above="@+id/temp"
-        android:layout_centerVertical="true"
-        android:textAlignment="center"/>
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_above="@+id/tempTitle"
-        android:layout_centerHorizontal="true"/>
     <TableRow
         android:id="@+id/tableFirstDay"
         android:background="#80000000"
@@ -129,7 +52,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
-        android:layout_below="@+id/weather_desc"
+        android:layout_below="@+id/weather"
         android:layout_centerHorizontal="true">
 
         <ImageView

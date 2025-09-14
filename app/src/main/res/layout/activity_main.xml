@@ -25,76 +25,55 @@
         android:text="@string/chile"
         android:layout_above="@+id/inputCityName"
         android:layout_alignEnd="@id/title"/>
+
     <EditText
-        android:textColorHint="@color/black"
         android:id="@+id/inputCityName"
-        android:layout_width="160dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="30dp"
         android:hint="@string/search"
         android:imeOptions="actionDone"
-        android:layout_centerInParent="true"/>
-    <ImageButton
-        android:id="@+id/search"
-        android:background="@drawable/spyglass"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="135dp"
-        android:layout_toRightOf="@+id/inputCityName"
-        android:layout_centerInParent="true"/>
-    <ImageButton
-        android:background="@drawable/back"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/inputCityName"
-        android:layout_centerHorizontal="true"/>
+        android:singleLine="true"
+        android:textColorHint="@color/white"
+        android:background="@drawable/search_city_style"
+        android:textSize="20sp" />
     <Button
-        android:textSize="17dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:id="@+id/chillanButton"
-        android:background="@android:color/transparent"
         android:layout_width="180dp"
         android:layout_height="40dp"
-        android:text="Chillán"
+        android:text="@string/chillan"
         android:layout_below="@+id/inputCityName"
-        android:layout_centerHorizontal="true"/>
-    <ImageButton
-        android:background="@drawable/back"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/chillanButton"
-        android:layout_centerInParent="true"/>
+        android:background="@drawable/fast_search_button"
+        app:backgroundTint="@null"
+        android:layout_centerHorizontal="true" />
     <Button
-        android:textSize="17dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:id="@+id/concepcionButton"
-        android:background="@android:color/transparent"
+        android:background="@drawable/fast_search_button"
+        app:backgroundTint="@null"
         android:layout_width="180dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:text="Concepción"
+        android:text="@string/concepcion"
         android:layout_below="@+id/chillanButton"
         android:layout_centerInParent="true"/>
-    <ImageButton
-        android:background="@drawable/back"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/concepcionButton"
-        android:layout_centerInParent="true"/>
     <Button
-        android:textSize="17dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:id="@+id/santiagoButton"
-        android:background="@android:color/transparent"
+        android:background="@drawable/fast_search_button"
+        app:backgroundTint="@null"
         android:layout_width="180dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:text="Santiago"
+        android:text="@string/santiago"
         android:layout_below="@+id/concepcionButton"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>

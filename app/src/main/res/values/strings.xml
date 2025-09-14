@@ -85,5 +85,8 @@
     <string name="thunderstorm_with_heavy_drizzle">Thunderstorm with heavy drizzle</string>
     <string name="app_title">WEATHER CLEAR</string>
     <string name="chile">CHILE</string>
+    <string name="chillan">CHILLÁN</string>
+    <string name="concepcion">CONCEPCIÓN</string>
+    <string name="santiago">SANTIAGO</string>
 
 </resources>

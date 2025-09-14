@@ -76,5 +76,7 @@
     <string name="thunderstorm_with_light_drizzle">Tormenta con llovizna ligera</string>
     <string name="thunderstorm_with_drizzle">Tormenta con llovizna</string>
     <string name="thunderstorm_with_heavy_drizzle">Tormenta con llovizna intensa</string>
+    <string name="app_title">WEATHER CLEAR</string>
+    <string name="chile">CHILE</string>
 
 </resources>

@@ -4,34 +4,27 @@
     android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageButton
-        android:background="@drawable/backtitle"
-        android:layout_width="220dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="135dp"
-        android:layout_above="@+id/inputCityName"
-        android:layout_centerInParent="true"/>
     <TextView
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WeatherClear"
+        android:text="@string/app_title"
         android:layout_above="@+id/subTitle"
         android:layout_centerHorizontal="true"/>
     <TextView
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:id="@+id/subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="150dp"
-        android:text="CHILE"
+        android:text="@string/chile"
         android:layout_above="@+id/inputCityName"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignEnd="@id/title"/>
     <EditText
         android:textColorHint="@color/black"
         android:id="@+id/inputCityName"

@@ -21,7 +21,7 @@
         android:id="@+id/subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="100dp"
         android:text="@string/chile"
         android:layout_above="@+id/inputCityName"
         android:layout_alignEnd="@id/title"/>

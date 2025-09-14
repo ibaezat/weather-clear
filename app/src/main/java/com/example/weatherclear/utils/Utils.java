@@ -29,6 +29,7 @@ public class Utils {
         }
     }
 
+    // Legacy method - Get the weather description from the string variable
     public static String getWeatherDescriptionString(Context context, String description) {
         if (description == null) return "";
 

@@ -31,10 +31,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CityWeather extends AppCompatActivity {
+
+    // TODO: Check how to use the correct font
+    // TODO: Check how to apply shadow to the texts
+
     ImageView iFirstDay;
     ImageView iSecondDay;
     ImageView iThirdDay;
-    ImageView iView;
 
     String apiKey = "e0256d5e7ea20a759ddace22c483d6b5";
 
@@ -49,7 +52,6 @@ public class CityWeather extends AppCompatActivity {
         setContentView(R.layout.city_weather);
         callWebService();
 
-        this.iView = findViewById(R.id.icon);
         this.iFirstDay = findViewById(R.id.iconFirstDay);
         this.iSecondDay = findViewById(R.id.iconSecondDay);
         this.iThirdDay = findViewById(R.id.iconThirdDay);
@@ -128,10 +130,8 @@ public class CityWeather extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setCurrentWeather(JSONObject responseJSON) throws JSONException {
         final TextView textViewTemp = findViewById(R.id.temp);
-        final TextView textViewTempMax = findViewById(R.id.temp_max);
-        final TextView textViewTempMin = findViewById(R.id.temp_min);
+        final TextView textCurrentMinAndMax = findViewById(R.id.current_min_and_max);
         final TextView textViewWeather = findViewById(R.id.weather);
-        final TextView textViewWeatherDesc = findViewById(R.id.weather_desc);
 
         JSONObject main = responseJSON.getJSONObject("main");
         JSONArray weatherArray = responseJSON.getJSONArray("weather");
@@ -140,18 +140,16 @@ public class CityWeather extends AppCompatActivity {
         double temp = main.getDouble("temp");
         double tempMax = main.getDouble("temp_max");
         double tempMin = main.getDouble("temp_min");
+        if (temp == tempMax && temp == tempMin) {
+            tempMax++;
+            tempMin--;
+        }
         String weatherMain = getWeatherMainString(CityWeather.this, weather.getString("main"));
-        String weatherDesc = getWeatherDescriptionString(CityWeather.this, weather.getString("description"));
 
-        textViewTemp.setText(((int) temp) + "°C");
-        textViewTempMax.setText(((int) tempMax) + "°C");
-        textViewTempMin.setText(((int) tempMin) + "°C");
+        textViewTemp.setText(((int) temp) + "°");
+
+        textCurrentMinAndMax.setText(((int) tempMax) + "°/" + ((int) tempMin) + "°");
         textViewWeather.setText(weatherMain);
-        textViewWeatherDesc.setText(weatherDesc);
-
-        String icon = weather.getString("icon");
-        int iconRes = getResources().getIdentifier("a" + icon, "drawable", getPackageName());
-        iView.setImageResource(iconRes);
     }
 
     public void forecast(String lat, String lon) {

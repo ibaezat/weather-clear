@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer ground;
     MediaPlayer mc;
     MediaPlayer mp;
-    private ImageButton searchButton;
 
     private static final int START_NIGHT = 20;
     private static final int END_NIGHT = 6;
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         this.continueToSantiago = findViewById(R.id.santiagoButton);
         this.continueToChillan = findViewById(R.id.chillanButton);
         this.continueToConcepcion = findViewById(R.id.concepcionButton);
-        this.searchButton = findViewById(R.id.search);
         this.mp = MediaPlayer.create(this, R.raw.open);
         this.mc = MediaPlayer.create(this, R.raw.close);
         this.ground = MediaPlayer.create(this, R.raw.ground);
@@ -95,21 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.openConcepcion();
             }
         });
-        this.searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws IllegalStateException {
-                MainActivity.this.mp.start();
-                MainActivity.this.mc.start();
-                MainActivity.this.searchCity();
-            }
-        });
 
         inputCityName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE ||
                         (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
-                    searchButton.performClick();
+                    MainActivity.this.mp.start();
+                    MainActivity.this.mc.start();
+                    MainActivity.this.searchCity();
                     return true;
                 }
                 return false;

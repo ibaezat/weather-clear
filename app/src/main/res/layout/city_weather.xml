@@ -41,7 +41,7 @@
         android:id="@+id/weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/loading"
+        android:text=""
         android:layout_below="@+id/current_min_and_max"
         android:layout_centerInParent="true"/>
     <LinearLayout
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/weather"
         android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="20dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="3">
@@ -70,13 +70,13 @@
                 android:id="@+id/iconFirstDay"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@drawable/soleado" />
+                android:src="" />
 
             <TextView
                 android:id="@+id/temperatureFirstDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30º/08º"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="25dp"/>
@@ -85,7 +85,6 @@
                 android:id="@+id/firstDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mar/08"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp"/>
@@ -106,13 +105,13 @@
                 android:id="@+id/iconSecondDay"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@drawable/soleado" />
+                android:src="" />
 
             <TextView
                 android:id="@+id/temperatureSecondDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="19º/08º"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="25dp"/>
@@ -121,7 +120,7 @@
                 android:id="@+id/secondDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mié/08"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp"/>
@@ -129,7 +128,7 @@
 
         <LinearLayout
             android:id="@+id/day3_card"
-            android:layout_width="0dp"
+            android:layout_width="dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
@@ -142,13 +141,13 @@
                 android:id="@+id/iconThirdDay"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@drawable/soleado" />
+                android:src="" />
 
             <TextView
                 android:id="@+id/temperatureThirdDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16º/08º"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="25dp"/>
@@ -157,7 +156,7 @@
                 android:id="@+id/thirdDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jue/08"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp"/>

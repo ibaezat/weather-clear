@@ -33,7 +33,6 @@ public class CityWeather extends AppCompatActivity {
 
     // TODO: Check how to use the correct font
     // TODO: Check how to apply shadow to the texts
-    // TODO: Optimize the images
     // TODO: Hide APIKEY xD
 
     // TO ASK: Missing Icon for Clouds and Sun

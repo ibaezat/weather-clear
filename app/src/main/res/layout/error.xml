@@ -4,21 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:textSize="30sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:id="@+id/oops"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/oops"
+        style="@style/ShadowText"
+        android:fontFamily="@font/smooch_sans_extra_bold"
         android:layout_centerInParent="true"/>
     <TextView
-        android:textSize="25sp"
+        android:textSize="40sp"
         android:textColor="@color/black"
         android:id="@+id/cityNotFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/city_not_found"
+        android:fontFamily="@font/smooch_sans_regular"
         android:layout_below="@+id/oops"
         android:layout_centerHorizontal="true"/>
 
@@ -27,6 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cityNotFound"
+        android:fontFamily="@font/smooch_sans_extra_bold"
+        android:textSize="25sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="170dp"
         android:backgroundTint="@color/black"

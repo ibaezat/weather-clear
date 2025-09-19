@@ -16,6 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.weatherclear.BuildConfig;
+
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -31,16 +33,12 @@ import org.json.JSONObject;
 
 public class CityWeather extends AppCompatActivity {
 
-    // TODO: Check how to use the correct font
-    // TODO: Check how to apply shadow to the texts
-    // TODO: Hide APIKEY xD
-
     // TO ASK: Missing Icon for Clouds and Sun
     ImageView iFirstDay;
     ImageView iSecondDay;
     ImageView iThirdDay;
 
-    String apiKey = "e0256d5e7ea20a759ddace22c483d6b5";
+    String apiKey = BuildConfig.WEATHER_API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +129,7 @@ public class CityWeather extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setCurrentWeather(JSONObject responseJSON) throws JSONException {
         final TextView textViewTemp = findViewById(R.id.temp);
-        final TextView textCurrentMinAndMax = findViewById(R.id.current_min_and_max);
+        final TextView textCurrentMinAndMax = findViewById(R.id.currentMinAndMax);
         final TextView textViewWeather = findViewById(R.id.weather);
 
         JSONObject main = responseJSON.getJSONObject("main");

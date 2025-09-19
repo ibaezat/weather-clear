@@ -15,7 +15,7 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="oops">Oops!</string>
-    <string name="city_not_found">City not Found!</string>
+    <string name="city_not_found">City not found!</string>
     <string name="thunderstorm">Thunderstorm</string>
     <string name="drizzle">Drizzle</string>
     <string name="rain">Rain</string>

@@ -89,5 +89,6 @@
     <string name="concepcion">CONCEPCIÓN</string>
     <string name="santiago">SANTIAGO</string>
     <string name="version_number">version 2.2.0</string>
+    <string name="quick_search">Quick Search</string>
 
 </resources>

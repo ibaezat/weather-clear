@@ -7,42 +7,49 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:textSize="40sp"
+        android:textSize="50sp"
         android:textColor="@color/white"
+        android:fontFamily="@font/smooch_sans_regular"
         android:id="@+id/cityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loading"
         android:layout_above="@+id/temp"
         android:layout_centerHorizontal="true"
+        style="@style/ShadowText"
         app:drawableLeftCompat="@drawable/location_icon" />
     <TextView
-        android:textSize="140sp"
+        android:textSize="200sp"
+        android:fontFamily="@font/smooch_sans_extra_bold"
         android:textColor="@color/white"
         android:id="@+id/temp"
+        style="@style/ShadowText"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:text=""
-        android:layout_above="@+id/current_min_and_max"
+        android:text="26°"
+        android:layout_above="@+id/currentMinAndMax"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"/>
     <TextView
-        android:textSize="40sp"
+        android:textSize="50sp"
         android:textColor="@color/white"
-        android:id="@+id/current_min_and_max"
+        android:fontFamily="@font/smooch_sans_semi_bold"
+        android:id="@+id/currentMinAndMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/loading"
+        style="@style/ShadowText"
         android:layout_centerInParent="true"/>
     <TextView
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textColor="@color/white"
+        android:fontFamily="@font/smooch_sans_semi_bold"
         android:id="@+id/weather"
+        style="@style/ShadowText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:layout_below="@+id/current_min_and_max"
+        android:layout_below="@+id/currentMinAndMax"
         android:layout_centerInParent="true"/>
     <LinearLayout
         android:id="@+id/forecast_container"
@@ -75,9 +82,10 @@
                 android:id="@+id/temperatureFirstDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/smooch_sans_semi_bold"
+                android:textSize="22sp"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="16sp"
                 android:layout_marginTop="25dp"/>
 
             <TextView
@@ -85,7 +93,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:fontFamily="@font/smooch_sans_regular"
+                android:textSize="20sp"
+                android:text=""
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
@@ -111,7 +121,8 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:fontFamily="@font/smooch_sans_semi_bold"
+                android:textSize="22sp"
                 android:layout_marginTop="25dp"/>
 
             <TextView
@@ -120,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:fontFamily="@font/smooch_sans_regular"
+                android:textSize="20sp"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
@@ -146,7 +158,8 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="22sp"
+                android:fontFamily="@font/smooch_sans_semi_bold"
                 android:layout_marginTop="25dp"/>
 
             <TextView
@@ -155,7 +168,8 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:fontFamily="@font/smooch_sans_regular"
+                android:textSize="20sp"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 

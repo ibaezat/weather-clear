@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShadowText">
+        <item name="android:paddingHorizontal">5dp</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">8</item>
+        <item name="android:shadowDy">8</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+
+</resources>

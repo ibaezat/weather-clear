@@ -19,7 +19,7 @@
         style="@style/ShadowText"
         app:drawableLeftCompat="@drawable/location_icon" />
     <TextView
-        android:textSize="200sp"
+        android:textSize="180sp"
         android:fontFamily="@font/smooch_sans_extra_bold"
         android:textColor="@color/white"
         android:id="@+id/temp"
@@ -27,6 +27,7 @@
         android:layout_width="240dp"
         android:includeFontPadding="false"
         android:layout_marginBottom="-45dp"
+        android:layout_marginTop="-10dp"
         android:layout_height="wrap_content"
         android:text="0°"
         android:layout_above="@+id/currentMinAndMax"

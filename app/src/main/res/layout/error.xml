@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cityNotFound"
         android:fontFamily="@font/smooch_sans_extra_bold"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="170dp"
         android:backgroundTint="@color/black"

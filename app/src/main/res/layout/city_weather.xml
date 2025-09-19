@@ -69,8 +69,7 @@
             <ImageView
                 android:id="@+id/iconFirstDay"
                 android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="" />
+                android:layout_height="45dp" />
 
             <TextView
                 android:id="@+id/temperatureFirstDay"
@@ -104,8 +103,7 @@
             <ImageView
                 android:id="@+id/iconSecondDay"
                 android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="" />
+                android:layout_height="45dp" />
 
             <TextView
                 android:id="@+id/temperatureSecondDay"
@@ -140,8 +138,7 @@
             <ImageView
                 android:id="@+id/iconThirdDay"
                 android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="" />
+                android:layout_height="45dp" />
 
             <TextView
                 android:id="@+id/temperatureThirdDay"

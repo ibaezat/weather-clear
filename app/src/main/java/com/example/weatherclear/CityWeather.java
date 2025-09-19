@@ -1,6 +1,5 @@
 package com.example.weatherclear;
 
-import static com.example.weatherclear.utils.Utils.getWeatherDescriptionString;
 import static com.example.weatherclear.utils.Utils.getWeatherMainString;
 
 import android.annotation.SuppressLint;
@@ -35,7 +34,9 @@ public class CityWeather extends AppCompatActivity {
     // TODO: Check how to use the correct font
     // TODO: Check how to apply shadow to the texts
     // TODO: Optimize the images
+    // TODO: Hide APIKEY xD
 
+    // TO ASK: Missing Icon for Clouds and Sun
     ImageView iFirstDay;
     ImageView iSecondDay;
     ImageView iThirdDay;
@@ -64,7 +65,7 @@ public class CityWeather extends AppCompatActivity {
         Intent intent = getIntent();
         String city = intent.getStringExtra("android.intent.extra.TEXT");
         if (city == null || city.isEmpty()) {
-            error();
+            goError();
             return;
         }
 
@@ -93,21 +94,21 @@ public class CityWeather extends AppCompatActivity {
 
                         String lat = coord.getString("lat");
                         String lon = coord.getString("lon");
-                        textViewCityName.setText(cityName);
+                        textViewCityName.setText(cityName.toUpperCase());
 
                         CityWeather.this.forecast(lat, lon);
                     } else {
-                        CityWeather.this.error();
+                        CityWeather.this.goError();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    CityWeather.this.error();
+                    CityWeather.this.goError();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                CityWeather.this.error();
+                CityWeather.this.goError();
             }
         });
         queue.add(stringRequest);
@@ -141,28 +142,33 @@ public class CityWeather extends AppCompatActivity {
         double temp = main.getDouble("temp");
         double tempMax = main.getDouble("temp_max");
         double tempMin = main.getDouble("temp_min");
-        if (temp == tempMax && temp == tempMin) {
-            tempMax++;
-            tempMin--;
-        }
-        String weatherMain = getWeatherMainString(CityWeather.this, weather.getString("main"));
+
 
         textViewTemp.setText(((int) temp) + "°");
+        textCurrentMinAndMax.setText(getMinAndMaxLabel(tempMax, tempMin));
 
-        textCurrentMinAndMax.setText(((int) tempMax) + "°/" + ((int) tempMin) + "°");
+        String weatherMain = getWeatherMainString(CityWeather.this, weather.getString("main"));
         textViewWeather.setText(weatherMain);
+    }
+
+    private String getMinAndMaxLabel(double tempMax, double tempMin){
+        int tempMaxInt = (int) tempMax;
+        int tempMinInt = (int) tempMin;
+        if (tempMaxInt == tempMinInt) {
+            tempMaxInt++;
+            tempMinInt--;
+        }
+
+        return tempMaxInt + "°/" + tempMinInt + "°";
     }
 
     public void forecast(String lat, String lon) {
         final TextView textViewTemperaturesFirstDay = (TextView) findViewById(R.id.temperatureFirstDay);
-        final TextView textViewWeatherFirstDay = (TextView) findViewById(R.id.weatherFirstDay);
         final TextView textViewFirstDay = (TextView) findViewById(R.id.firstDay);
         final TextView textViewTemperaturesSecondDay = (TextView) findViewById(R.id.temperatureSecondDay);
-        final TextView textViewWeatherSecondDay = (TextView) findViewById(R.id.weatherSecondDay);
-        final TextView textViewSecondDay = (TextView) findViewById(R.id.SecondDay);
+        final TextView textViewSecondDay = (TextView) findViewById(R.id.secondDay);
         final TextView textViewTemperaturesThirdDay = (TextView) findViewById(R.id.temperatureThirdDay);
-        final TextView textViewWeatherThirdDay = (TextView) findViewById(R.id.weatherThirdDay);
-        final TextView textViewThirdDay = (TextView) findViewById(R.id.ThirdDay);
+        final TextView textViewThirdDay = (TextView) findViewById(R.id.thirdDay);
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=" + apiKey + "&units=metric";
         StringRequest stringRequest = new StringRequest(0, url, new Response.Listener<String>() {
@@ -196,28 +202,24 @@ public class CityWeather extends AppCompatActivity {
 
                         double tempMax = main.getDouble("temp_max");
                         double tempMin = main.getDouble("temp_min");
-                        String weatherMain = getWeatherMainString(CityWeather.this, weather.getString("main"));
+
                         String icon = weather.getString("icon");
-                        String tempStr = ((int) tempMax) + "°/" + ((int) tempMin) + "°";
-
+                        String normalized_icon = getNormalizedIcon(icon);
+                        int iconRes = getResources().getIdentifier(normalized_icon, "drawable", getPackageName());
+                        String tempStr = getMinAndMaxLabel(tempMax, tempMin);
                         String dayName = getDayOfTheWeek(String.valueOf(item.getLong("dt")));
-
-                        int iconRes = getResources().getIdentifier("a" + icon, "drawable", getPackageName());
 
                         if (i == 0) {
                             iFirstDay.setImageResource(iconRes);
                             textViewTemperaturesFirstDay.setText(tempStr);
-                            textViewWeatherFirstDay.setText(weatherMain);
                             textViewFirstDay.setText(dayName);
                         } else if (i == 1) {
                             iSecondDay.setImageResource(iconRes);
                             textViewTemperaturesSecondDay.setText(tempStr);
-                            textViewWeatherSecondDay.setText(weatherMain);
                             textViewSecondDay.setText(dayName);
                         } else {
                             iThirdDay.setImageResource(iconRes);
                             textViewTemperaturesThirdDay.setText(tempStr);
-                            textViewWeatherThirdDay.setText(weatherMain);
                             textViewThirdDay.setText(dayName);
                         }
                     }
@@ -230,10 +232,51 @@ public class CityWeather extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("Error -> forecaste on error response");
-                error();
+                goError();
             }
         });
         queue.add(stringRequest);
+    }
+
+    private String getNormalizedIcon(String icon) {
+        System.out.print(icon);
+        String result = "";
+        switch (icon) {
+            case "01d":
+            case "01n":
+                result = "soleado";
+                break;
+            case "50n":
+            case "50d":
+                result = "neblina";
+                break;
+            case "11n":
+            case "11d":
+                result = "rayos";
+                break;
+            case "03n":
+            case "03d":
+            case "04n":
+            case "04d":
+                result = "nublado";
+                break;
+            case "09n":
+            case "09d":
+                result = "lluvia";
+                break;
+            case "10n":
+            case "10d":
+                result = "lluvia_con_sol";
+                break;
+            case "13n":
+            case "13d":
+                result = "lluvia_con_sol";
+                break;
+            default:
+                result = "a" + icon;
+        }
+
+        return result;
     }
 
     public static String truncateTemp(String value, int length) {
@@ -281,12 +324,8 @@ public class CityWeather extends AppCompatActivity {
     }
 
     public void goError() {
+        finish();
         Intent intentGoError = new Intent(this, (Class<?>) Error.class);
         startActivity(intentGoError);
-    }
-
-    public void error() {
-        finish();
-        goError();
     }
 }

@@ -121,7 +121,7 @@ public class CityWeather extends AppCompatActivity {
         int resourceId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
 
         if (resourceId == 0) {
-            resourceId = R.drawable.background;
+            resourceId = R.drawable.background01d;
         }
 
         return resourceId;

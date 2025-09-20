@@ -76,21 +76,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) throws IllegalStateException {
                 MainActivity.this.ground.start();
-                MainActivity.this.openChillan();
+                MainActivity.this.openQuickSearchCity("Chillan");
             }
         });
         this.continueToSantiago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) throws IllegalStateException {
                 MainActivity.this.ground.start();
-                MainActivity.this.openSantiago();
+                MainActivity.this.openQuickSearchCity("Santiago");
             }
         });
         this.continueToConcepcion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) throws IllegalStateException {
                 MainActivity.this.ground.start();
-                MainActivity.this.openConcepcion();
+                MainActivity.this.openQuickSearchCity("Concepcion");
             }
         });
 
@@ -109,22 +109,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void openChillan() {
-        Intent intentChillan = new Intent(this, (Class<?>) CityWeather.class);
-        intentChillan.putExtra("android.intent.extra.TEXT", "Chillan");
-        startActivity(intentChillan);
-    }
-
-    public void openSantiago() {
-        Intent intentSantiago = new Intent(this, (Class<?>) CityWeather.class);
-        intentSantiago.putExtra("android.intent.extra.TEXT", "Santiago");
-        startActivity(intentSantiago);
-    }
-
-    public void openConcepcion() {
-        Intent intentConcepcion = new Intent(this, (Class<?>) CityWeather.class);
-        intentConcepcion.putExtra("android.intent.extra.TEXT", "Concepcion");
-        startActivity(intentConcepcion);
+    public void openQuickSearchCity(String city) {
+        Intent intentCity = new Intent(this, (Class<?>) CityWeather.class);
+        intentCity.putExtra("android.intent.extra.TEXT", city);
+        startActivity(intentCity);
     }
 
     public void searchCity() {

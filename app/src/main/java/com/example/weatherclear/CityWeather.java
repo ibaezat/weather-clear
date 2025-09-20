@@ -33,7 +33,10 @@ import org.json.JSONObject;
 
 public class CityWeather extends AppCompatActivity {
 
-    // TO ASK: Missing Icon for Clouds and Sun
+    // TODO: Add custom cities to quick search
+    // TODO: Current Location function - I need UI work here
+    // TODO: Ask for missing Icon for Clouds and Sun - I need UI work here
+
     ImageView iFirstDay;
     ImageView iSecondDay;
     ImageView iThirdDay;

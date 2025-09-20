@@ -39,6 +39,7 @@ public class CityWeather extends AppCompatActivity {
     // TODO: I need a design for Current Location Functionality
     // TODO: I need an Icon for Clouds and Sun
     // TODO: I need a remove Icon.
+    // TODO: I need a design for Widget
 
     QuickSearchManager quickSearch;
     Button addToQuickSearch;
@@ -226,7 +227,7 @@ public class CityWeather extends AppCompatActivity {
                         String dtTxt = item.getString("dt_txt");
                         String date = dtTxt.split(" ")[0];
 
-                        if (!dailyData.containsKey(date) && dtTxt.contains("12:00:00")) {
+                        if (!dailyData.containsKey(date) && dtTxt.contains("15:00:00")) {
                             dailyData.put(date, item);
                         }
                     }

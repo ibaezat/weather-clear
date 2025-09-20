@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/search_city_style"
+    android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/widget_city"
+        android:text="Ciudad"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:fontFamily="@font/smooch_sans_extra_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/widget_temp"
+        android:text="--°C"
+        android:textSize="34sp"
+        android:gravity="center"
+        android:fontFamily="@font/smooch_sans_semi_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/widget_refresh"
+        android:text="Actualizar"
+        android:textSize="24sp"
+        android:fontFamily="@font/smooch_sans_extra_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

@@ -5,9 +5,11 @@ import static com.example.weatherclear.utils.Utils.getWeatherMainString;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.weatherclear.BuildConfig;
 
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -33,7 +34,15 @@ import org.json.JSONObject;
 
 public class CityWeather extends AppCompatActivity {
 
-    // TO ASK: Missing Icon for Clouds and Sun
+    // TODO: Implement Current Location Function using GPS
+
+    // TODO: I need a design for Current Location Functionality
+    // TODO: I need an Icon for Clouds and Sun
+    // TODO: I need a remove Icon.
+
+    QuickSearchManager quickSearch;
+    Button addToQuickSearch;
+    TextView currentCity;
     ImageView iFirstDay;
     ImageView iSecondDay;
     ImageView iThirdDay;
@@ -48,12 +57,16 @@ public class CityWeather extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
 
+        quickSearch = new QuickSearchManager(this);
         setContentView(R.layout.city_weather);
         callWebService();
 
+        this.addToQuickSearch = findViewById(R.id.btnAddQuickSearch);
+        this.currentCity = findViewById(R.id.cityName);
         this.iFirstDay = findViewById(R.id.iconFirstDay);
         this.iSecondDay = findViewById(R.id.iconSecondDay);
         this.iThirdDay = findViewById(R.id.iconThirdDay);
+
     }
 
     public void callWebService() {
@@ -93,6 +106,8 @@ public class CityWeather extends AppCompatActivity {
                         String lon = coord.getString("lon");
                         textViewCityName.setText(cityName.toUpperCase());
 
+                        configureQuickSearchButton(cityName.toUpperCase());
+
                         CityWeather.this.forecast(lat, lon);
                     } else {
                         CityWeather.this.goError();
@@ -110,6 +125,35 @@ public class CityWeather extends AppCompatActivity {
         });
         queue.add(stringRequest);
     }
+
+    private void configureQuickSearchButton(String cityName) {
+        if (quickSearch.hasCity(cityName)) {
+            addToQuickSearch.setText(R.string.remove_from_main_screen);
+            addToQuickSearch.setOnClickListener(v -> {
+                boolean removed = quickSearch.removeCity(cityName);
+                int toastTextId = removed ?
+                        R.string.city_removed_from_quick_search :
+                        R.string.city_was_not_removed_from_quick_search;
+                Toast.makeText(this, toastTextId, Toast.LENGTH_SHORT).show();
+                addToQuickSearch.setText(R.string.add_to_main_screen);
+
+                configureQuickSearchButton(cityName);
+            });
+        } else {
+            addToQuickSearch.setText(R.string.add_to_main_screen);
+            addToQuickSearch.setOnClickListener(v -> {
+                boolean added = quickSearch.addCity(cityName);
+                int toastTextId = added ?
+                        R.string.city_added_to_quick_search :
+                        R.string.city_was_not_added_to_quick_search;
+                Toast.makeText(this, toastTextId, Toast.LENGTH_SHORT).show();
+                addToQuickSearch.setText(R.string.remove_from_main_screen);
+
+                configureQuickSearchButton(cityName);
+            });
+        }
+    }
+
 
     private int getBackgroundIdBasedOnIcon(String icon) {
         if (icon == null || icon.isEmpty()) return 0;

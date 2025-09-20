@@ -6,6 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/btnAddQuickSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_value"
+        android:drawableEnd="@drawable/add"
+        android:textColor="@color/white"
+        android:background="@drawable/fast_search_button"
+        app:backgroundTint="@null"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/smooch_sans_regular"
+        android:textSize="20sp"/>
+
     <TextView
         android:textSize="50sp"
         android:textColor="@color/white"
@@ -87,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/smooch_sans_semi_bold"
                 android:textSize="22sp"
-                android:text=""
+                android:text="@string/empty_value"
                 android:textColor="@color/white"
                 android:layout_marginTop="25dp"/>
 
@@ -98,7 +114,7 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/smooch_sans_regular"
                 android:textSize="20sp"
-                android:text=""
+                android:text="@string/empty_value"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
@@ -122,7 +138,7 @@
                 android:id="@+id/temperatureSecondDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="@string/empty_value"
                 android:textColor="@color/white"
                 android:fontFamily="@font/smooch_sans_semi_bold"
                 android:textSize="22sp"
@@ -132,7 +148,7 @@
                 android:id="@+id/secondDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="@string/empty_value"
                 android:textColor="@color/white"
                 android:fontFamily="@font/smooch_sans_regular"
                 android:textSize="20sp"
@@ -159,7 +175,7 @@
                 android:id="@+id/temperatureThirdDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="@string/empty_value"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:fontFamily="@font/smooch_sans_semi_bold"
@@ -169,7 +185,7 @@
                 android:id="@+id/thirdDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="@string/empty_value"
                 android:textColor="@color/white"
                 android:fontFamily="@font/smooch_sans_regular"
                 android:textSize="20sp"

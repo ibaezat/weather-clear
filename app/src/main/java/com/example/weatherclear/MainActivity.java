@@ -1,31 +1,35 @@
 package com.example.weatherclear;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Calendar;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
-    private AlertDialog.Builder alertBuilder;
-    private Button continueToChillan;
-    private Button continueToConcepcion;
-    private Button continueToSantiago;
-    MediaPlayer ground;
-    MediaPlayer mc;
-    MediaPlayer mp;
+
+    QuickSearchManager quickSearch;
+    private Button continueToCity1;
+    private Button continueToCity2;
+    private Button continueToCity3;
+    MediaPlayer closeSound;
+    MediaPlayer openSound;
 
     private static final int START_NIGHT = 20;
     private static final int END_NIGHT = 6;
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        quickSearch = new QuickSearchManager(this);
+
         RelativeLayout rootLayout = findViewById(R.id.rootLayout);
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 
@@ -64,49 +70,77 @@ public class MainActivity extends AppCompatActivity {
         int drawableResId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
         rootLayout.setBackgroundResource(drawableResId);
 
-        this.continueToSantiago = findViewById(R.id.santiagoButton);
-        this.continueToChillan = findViewById(R.id.chillanButton);
-        this.continueToConcepcion = findViewById(R.id.concepcionButton);
-        this.mp = MediaPlayer.create(this, R.raw.open);
-        this.mc = MediaPlayer.create(this, R.raw.close);
-        this.ground = MediaPlayer.create(this, R.raw.ground);
+        this.continueToCity3 = findViewById(R.id.city3Button);
+        this.continueToCity1 = findViewById(R.id.city1Button);
+        this.continueToCity2 = findViewById(R.id.city2Button);
+        this.openSound = MediaPlayer.create(this, R.raw.open);
+        this.closeSound = MediaPlayer.create(this, R.raw.close);
         EditText inputCityName = findViewById(R.id.inputCityName);
 
-        this.continueToChillan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws IllegalStateException {
-                MainActivity.this.ground.start();
-                MainActivity.this.openQuickSearchCity("Chillan");
-            }
-        });
-        this.continueToSantiago.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws IllegalStateException {
-                MainActivity.this.ground.start();
-                MainActivity.this.openQuickSearchCity("Santiago");
-            }
-        });
-        this.continueToConcepcion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws IllegalStateException {
-                MainActivity.this.ground.start();
-                MainActivity.this.openQuickSearchCity("Concepcion");
-            }
-        });
+        configureQuickSearchButtons();
 
         inputCityName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE ||
                         (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
-                    MainActivity.this.mp.start();
-                    MainActivity.this.mc.start();
+                    MainActivity.this.openSound.start();
                     MainActivity.this.searchCity();
                     return true;
                 }
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        MainActivity.this.closeSound.start();
+        configureQuickSearchButtons();
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void configureQuickSearchButtons(){
+        Set<String> cities = quickSearch.getCities();
+
+        List<String> savedCityList = new ArrayList<>(cities);
+
+        Button[] buttons = {
+                continueToCity1,
+                continueToCity2,
+                continueToCity3
+        };
+
+        for (int i = 0; i < buttons.length; i++) {
+            if (i < savedCityList.size()) {
+                String cityName = savedCityList.get(i);
+                buttons[i].setText(cityName);
+                buttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) throws IllegalStateException {
+                        MainActivity.this.openSound.start();
+                        MainActivity.this.openQuickSearchCity(cityName);
+                    }
+                });
+                buttons[i].setBackgroundResource(R.drawable.fast_search_button);
+            } else {
+                buttons[i].setText(R.string.add_city_slot);
+                buttons[i].setBackgroundResource(R.drawable.empty_quick_search_slot);
+                buttons[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        EditText searchInput = findViewById(R.id.inputCityName);
+                        searchInput.requestFocus();
+
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if (imm != null) {
+                            imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
+                        }
+                    }
+                });
+            }
+        }
     }
 
     public void openQuickSearchCity(String city) {

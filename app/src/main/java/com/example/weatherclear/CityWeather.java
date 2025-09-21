@@ -35,6 +35,8 @@ import org.json.JSONObject;
 public class CityWeather extends AppCompatActivity {
 
     // TODO: Implement Current Location Function using GPS
+    // TODO: Improve and Optimize Code
+    // TODO: Improve forecast
 
     // TODO: I need a design for Current Location Functionality
     // TODO: I need an Icon for Clouds and Sun

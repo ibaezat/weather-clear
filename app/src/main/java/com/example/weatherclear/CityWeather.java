@@ -36,7 +36,6 @@ public class CityWeather extends AppCompatActivity {
 
     // TODO: Implement Current Location Function using GPS
     // TODO: Improve and Optimize Code
-    // TODO: Improve forecast
 
     // TODO: I need a design for Current Location Functionality
     // TODO: I need an Icon for Clouds and Sun
@@ -82,10 +81,6 @@ public class CityWeather extends AppCompatActivity {
             return;
         }
 
-        // get the text view to display the city name
-        final TextView textViewCityName = findViewById(R.id.cityName);
-        final RelativeLayout layout = findViewById(R.id.Layout);
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",CL&appid=" + apiKey + "&units=metric";
         StringRequest stringRequest = new StringRequest(0, url, new Response.Listener<String>() {
@@ -98,18 +93,9 @@ public class CityWeather extends AppCompatActivity {
                     if (cod.equals("200")) {
                         CityWeather.this.setCurrentWeather(responseJSON);
 
-                        JSONArray weatherArray = responseJSON.getJSONArray("weather");
                         JSONObject coord = responseJSON.getJSONObject("coord");
-                        String cityName = responseJSON.getString("name");
-                        JSONObject weather = weatherArray.getJSONObject(0);
-
-                        layout.setBackgroundResource(getBackgroundIdBasedOnIcon(weather.getString("icon")));
-
                         String lat = coord.getString("lat");
                         String lon = coord.getString("lon");
-                        textViewCityName.setText(cityName.toUpperCase());
-
-                        configureQuickSearchButton(cityName.toUpperCase());
 
                         CityWeather.this.forecast(lat, lon);
                     } else {
@@ -178,21 +164,25 @@ public class CityWeather extends AppCompatActivity {
         final TextView textViewTemp = findViewById(R.id.temp);
         final TextView textCurrentMinAndMax = findViewById(R.id.currentMinAndMax);
         final TextView textViewWeather = findViewById(R.id.weather);
+        final RelativeLayout layout = findViewById(R.id.Layout);
+        final TextView textViewCityName = findViewById(R.id.cityName);
 
         JSONObject main = responseJSON.getJSONObject("main");
         JSONArray weatherArray = responseJSON.getJSONArray("weather");
         JSONObject weather = weatherArray.getJSONObject(0);
+        String cityName = responseJSON.getString("name");
+
+        configureQuickSearchButton(cityName.toUpperCase());
 
         double temp = main.getDouble("temp");
         double tempMax = main.getDouble("temp_max");
         double tempMin = main.getDouble("temp_min");
 
-
+        textViewCityName.setText(cityName.toUpperCase());
         textViewTemp.setText(((int) temp) + "°");
         textCurrentMinAndMax.setText(getMinAndMaxLabel(tempMax, tempMin));
-
-        String weatherMain = getWeatherMainString(CityWeather.this, weather.getString("main"));
-        textViewWeather.setText(weatherMain);
+        layout.setBackgroundResource(getBackgroundIdBasedOnIcon(weather.getString("icon")));
+        textViewWeather.setText(getWeatherMainString(CityWeather.this, weather.getString("main")));
     }
 
     private String getMinAndMaxLabel(double tempMax, double tempMin){
@@ -222,36 +212,56 @@ public class CityWeather extends AppCompatActivity {
                     JSONObject responseJSON = new JSONObject(response);
                     JSONArray list = responseJSON.getJSONArray("list");
 
-                    Map<String, JSONObject> dailyData = new LinkedHashMap<>();
+                    Map<String, List<JSONObject>> dailyData = new LinkedHashMap<>();
 
                     for (int i = 0; i < list.length(); i++) {
                         JSONObject item = list.getJSONObject(i);
                         String dtTxt = item.getString("dt_txt");
                         String date = dtTxt.split(" ")[0];
+                        String hour = dtTxt.split(" ")[1];
 
-                        if (!dailyData.containsKey(date) && dtTxt.contains("15:00:00")) {
-                            dailyData.put(date, item);
+                        int h = Integer.parseInt(hour.substring(0, 2));
+                        if (h >= 3 && h <= 21) {
+                            if (!dailyData.containsKey(date)) {
+                                dailyData.put(date, new ArrayList<>());
+                            }
+                            dailyData.get(date).add(item);
                         }
                     }
 
                     List<String> dates = new ArrayList<>(dailyData.keySet());
 
+
+
                     for (int i = 0; i < Math.min(3, dates.size()); i++) {
                         String date = dates.get(i);
-                        JSONObject item = dailyData.get(date);
+                        List<JSONObject> dayItems = dailyData.get(date);
 
-                        JSONObject main = item.getJSONObject("main");
-                        JSONArray weatherArray = item.getJSONArray("weather");
-                        JSONObject weather = weatherArray.getJSONObject(0);
+                        double tempMin = Double.MAX_VALUE;
+                        double tempMax = -Double.MAX_VALUE;
+                        String icon = null;
 
-                        double tempMax = main.getDouble("temp_max");
-                        double tempMin = main.getDouble("temp_min");
+                        for (JSONObject item : dayItems) {
+                            JSONObject main = item.getJSONObject("main");
+                            tempMin = Math.min(tempMin, main.getDouble("temp_min"));
+                            tempMax = Math.max(tempMax, main.getDouble("temp_max"));
 
-                        String icon = weather.getString("icon");
+                            String dtTxt = item.getString("dt_txt");
+                            if (dtTxt.contains("15:00:00")) {
+                                JSONArray weatherArray = item.getJSONArray("weather");
+                                icon = weatherArray.getJSONObject(0).getString("icon");
+                            }
+                        }
+
+                        if (icon == null && !dayItems.isEmpty()) {
+                            JSONArray weatherArray = dayItems.get(0).getJSONArray("weather");
+                            icon = weatherArray.getJSONObject(0).getString("icon");
+                        }
+
                         String normalized_icon = getNormalizedIcon(icon);
                         int iconRes = getResources().getIdentifier(normalized_icon, "drawable", getPackageName());
                         String tempStr = getMinAndMaxLabel(tempMax, tempMin);
-                        String dayName = getDayOfTheWeek(String.valueOf(item.getLong("dt")));
+                        String dayName = getDayOfTheWeek(String.valueOf(dayItems.get(0).getLong("dt")));
 
                         if (i == 0) {
                             iFirstDay.setImageResource(iconRes);
@@ -266,7 +276,7 @@ public class CityWeather extends AppCompatActivity {
                             textViewTemperaturesThirdDay.setText(tempStr);
                             textViewThirdDay.setText(dayName);
                         }
-                    }
+                }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

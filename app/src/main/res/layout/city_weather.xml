@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/weather"
         android:layout_marginTop="60dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="3">
@@ -105,7 +105,7 @@
                 android:textSize="22sp"
                 android:text="@string/empty_value"
                 android:textColor="@color/white"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:id="@+id/firstDay"
@@ -142,7 +142,7 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/smooch_sans_semi_bold"
                 android:textSize="22sp"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:id="@+id/secondDay"
@@ -179,7 +179,7 @@
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:fontFamily="@font/smooch_sans_semi_bold"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:id="@+id/thirdDay"

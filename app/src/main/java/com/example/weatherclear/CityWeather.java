@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -68,6 +69,15 @@ public class CityWeather extends AppCompatActivity {
         this.iFirstDay = findViewById(R.id.iconFirstDay);
         this.iSecondDay = findViewById(R.id.iconSecondDay);
         this.iThirdDay = findViewById(R.id.iconThirdDay);
+        Intent intentGoHome = new Intent(this, MainActivity.class);
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                intentGoHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentGoHome);
+                finish();
+            }
+        });
 
     }
 

@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     public void openQuickSearchCity(String city) {
         Intent intentCity = new Intent(this, (Class<?>) CityWeather.class);
         intentCity.putExtra("android.intent.extra.TEXT", city);
+        finish();
         startActivity(intentCity);
     }
 
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         EditText textToPass = (EditText) findViewById(R.id.inputCityName);
         String cityName = textToPass.getText().toString();
         intentSearchCity.putExtra("android.intent.extra.TEXT", cityName);
+        finish();
         startActivity(intentSearchCity);
     }
 }

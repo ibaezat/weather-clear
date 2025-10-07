@@ -1,8 +1,13 @@
 package com.example.weatherclear;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,10 +16,13 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button continueToCity3;
     MediaPlayer closeSound;
     MediaPlayer openSound;
-
+    FusedLocationProviderClient fusedLocationClient;
     private static final int START_NIGHT = 20;
     private static final int END_NIGHT = 6;
 
@@ -52,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         quickSearch = new QuickSearchManager(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         RelativeLayout rootLayout = findViewById(R.id.rootLayout);
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -70,12 +79,14 @@ public class MainActivity extends AppCompatActivity {
         int drawableResId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
         rootLayout.setBackgroundResource(drawableResId);
 
-        this.continueToCity3 = findViewById(R.id.city3Button);
         this.continueToCity1 = findViewById(R.id.city1Button);
         this.continueToCity2 = findViewById(R.id.city2Button);
+        this.continueToCity3 = findViewById(R.id.city3Button);
         this.openSound = MediaPlayer.create(this, R.raw.open);
         this.closeSound = MediaPlayer.create(this, R.raw.close);
+
         EditText inputCityName = findViewById(R.id.inputCityName);
+        LinearLayout useCurrentLocationButton = findViewById(R.id.useCurrentLocationButton);
 
         configureQuickSearchButtons();
 
@@ -90,6 +101,26 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return false;
             }
+        });
+
+        useCurrentLocationButton.setOnClickListener(v -> {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
+
+            }
+
+            fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                if (location != null) {
+                    double lat = location.getLatitude();
+                    double lon = location.getLongitude();
+
+                    openCityWeatherWithCoordinates(lat, lon);
+                } else {
+                    Toast.makeText(this, R.string.city_added_to_quick_search, Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 
@@ -149,6 +180,15 @@ public class MainActivity extends AppCompatActivity {
         finish();
         startActivity(intentCity);
     }
+
+    private void openCityWeatherWithCoordinates(double lat, double lon) {
+        Intent intent = new Intent(this, CityWeather.class);
+        intent.putExtra("lat", lat);
+        intent.putExtra("lon", lon);
+        finish();
+        startActivity(intent);
+    }
+
 
     public void searchCity() {
         Intent intentSearchCity = new Intent(this, (Class<?>) CityWeather.class);

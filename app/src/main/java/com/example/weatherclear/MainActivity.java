@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
                     openCityWeatherWithCoordinates(lat, lon);
                 } else {
-                    Toast.makeText(this, R.string.city_added_to_quick_search, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.gps_not_working, Toast.LENGTH_SHORT).show();
                 }
             });
         });

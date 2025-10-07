@@ -35,12 +35,7 @@ import org.json.JSONObject;
 
 public class CityWeather extends AppCompatActivity {
 
-    // TODO: Implement Current Location Function using GPS
     // TODO: Improve and Optimize Code
-
-    // TODO: I need a design for Current Location Functionality
-    // TODO: I need an Icon for Clouds and Sun
-    // TODO: I need a remove Icon.
     // TODO: I need a design for Widget
 
     QuickSearchManager quickSearch;
@@ -62,13 +57,26 @@ public class CityWeather extends AppCompatActivity {
 
         quickSearch = new QuickSearchManager(this);
         setContentView(R.layout.city_weather);
-        callWebService();
 
         this.addToQuickSearch = findViewById(R.id.btnAddQuickSearch);
         this.currentCity = findViewById(R.id.cityName);
         this.iFirstDay = findViewById(R.id.iconFirstDay);
         this.iSecondDay = findViewById(R.id.iconSecondDay);
         this.iThirdDay = findViewById(R.id.iconThirdDay);
+
+        Intent intent = getIntent();
+        String city = intent.getStringExtra("android.intent.extra.TEXT");
+        double lat = intent.getDoubleExtra("lat", Double.NaN);
+        double lon = intent.getDoubleExtra("lon", Double.NaN);
+
+        if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
+            callWebServiceByCoordinates(lat, lon);
+        } else if (city != null && !city.isEmpty()) {
+            callWebServiceByCity(city);
+        } else {
+            goError();
+        }
+
         Intent intentGoHome = new Intent(this, MainActivity.class);
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -81,16 +89,31 @@ public class CityWeather extends AppCompatActivity {
 
     }
 
-    public void callWebService() {
+    public void callWebServiceByCoordinates(double lat, double lon) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
 
-        // check if the city is a valid input
-        Intent intent = getIntent();
-        String city = intent.getStringExtra("android.intent.extra.TEXT");
-        if (city == null || city.isEmpty()) {
-            goError();
-            return;
-        }
+        StringRequest stringRequest = new StringRequest(0, url, response -> {
+            try {
+                JSONObject responseJSON = new JSONObject(response);
+                String cod = responseJSON.getString("cod");
 
+                if (cod.equals("200")) {
+                    setCurrentWeather(responseJSON);
+                    forecast(String.valueOf(lat), String.valueOf(lon));
+                } else {
+                    goError();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                goError();
+            }
+        }, error -> goError());
+
+        queue.add(stringRequest);
+    }
+
+    public void callWebServiceByCity(String city) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",CL&appid=" + apiKey + "&units=metric";
         StringRequest stringRequest = new StringRequest(0, url, new Response.Listener<String>() {
@@ -128,25 +151,27 @@ public class CityWeather extends AppCompatActivity {
     private void configureQuickSearchButton(String cityName) {
         if (quickSearch.hasCity(cityName)) {
             addToQuickSearch.setText(R.string.remove_from_main_screen);
+            addToQuickSearch.setCompoundDrawablesWithIntrinsicBounds(
+                    0, 0, R.drawable.trash, 0);
             addToQuickSearch.setOnClickListener(v -> {
                 boolean removed = quickSearch.removeCity(cityName);
                 int toastTextId = removed ?
                         R.string.city_removed_from_quick_search :
                         R.string.city_was_not_removed_from_quick_search;
                 Toast.makeText(this, toastTextId, Toast.LENGTH_SHORT).show();
-                addToQuickSearch.setText(R.string.add_to_main_screen);
 
                 configureQuickSearchButton(cityName);
             });
         } else {
             addToQuickSearch.setText(R.string.add_to_main_screen);
+            addToQuickSearch.setCompoundDrawablesWithIntrinsicBounds(
+                    0, 0, R.drawable.add, 0);
             addToQuickSearch.setOnClickListener(v -> {
                 boolean added = quickSearch.addCity(cityName);
                 int toastTextId = added ?
                         R.string.city_added_to_quick_search :
                         R.string.city_was_not_added_to_quick_search;
                 Toast.makeText(this, toastTextId, Toast.LENGTH_SHORT).show();
-                addToQuickSearch.setText(R.string.remove_from_main_screen);
 
                 configureQuickSearchButton(cityName);
             });
@@ -309,6 +334,10 @@ public class CityWeather extends AppCompatActivity {
             case "01d":
             case "01n":
                 result = "soleado";
+                break;
+            case "02d":
+            case "02n":
+                result = "nubes_con_sol";
                 break;
             case "50n":
             case "50d":

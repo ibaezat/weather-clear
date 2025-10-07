@@ -32,6 +32,9 @@
         android:text="@string/loading"
         android:layout_above="@+id/temp"
         android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:maxWidth="300dp"
         style="@style/ShadowText"
         app:drawableLeftCompat="@drawable/location_icon" />
     <TextView

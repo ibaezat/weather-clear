@@ -101,6 +101,35 @@
         android:text="@string/empty_value"
         android:layout_below="@+id/city2Button"
         android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/useCurrentLocationButton"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/current_location_button"
+        android:layout_below="@+id/city3Button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/location_icon"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/use_current_location"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/smooch_sans_regular"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
     <TextView
         android:textSize="14sp"
         android:fontFamily="@font/smooch_sans_regular"
@@ -113,5 +142,5 @@
         android:layout_marginTop="10sp"
         android:text="@string/version_number"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/city3Button" />
+        android:layout_below="@id/useCurrentLocationButton" />
 </RelativeLayout>

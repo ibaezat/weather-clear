@@ -10,6 +10,7 @@ public class QuickSearchManager {
 
     private static final String PREFS_NAME = "quick_search_prefs";
     private static final String KEY_CITIES = "quick_search_cities";
+    private static final String KEY_LAST_SEARCH = "last_search";
     private static final int MAX_CITIES = 3;
 
     private SharedPreferences prefs;
@@ -39,6 +40,10 @@ public class QuickSearchManager {
         return removed;
     }
 
+    public void setLastSearch(String city) {
+        prefs.edit().putString(KEY_LAST_SEARCH, city).apply();
+    }
+
     public boolean hasCity(String city) {
         Set<String> cities = getCities();
         return cities.contains(city);
@@ -46,5 +51,9 @@ public class QuickSearchManager {
 
     public Set<String> getCities() {
         return prefs.getStringSet(KEY_CITIES, new HashSet<>());
+    }
+
+    public String getLastSearch() {
+        return prefs.getString(KEY_LAST_SEARCH, "CHILLÁN");
     }
 }

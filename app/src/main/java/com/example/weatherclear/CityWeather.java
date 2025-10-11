@@ -208,6 +208,7 @@ public class CityWeather extends AppCompatActivity {
         String cityName = responseJSON.getString("name");
 
         configureQuickSearchButton(cityName.toUpperCase());
+        quickSearch.setLastSearch(cityName.toUpperCase());
 
         double temp = main.getDouble("temp");
         double tempMax = main.getDouble("temp_max");

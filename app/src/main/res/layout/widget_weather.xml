@@ -1,37 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
     android:background="@drawable/search_city_style"
-    android:padding="8dp"
+    android:paddingVertical="8dp"
+    android:paddingEnd="8dp"
+    android:paddingStart="20dp"
+    android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/widget_city"
-        android:text="Ciudad"
-        android:textSize="26sp"
+        android:text="@string/empty_value"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:fontFamily="@font/smooch_sans_extra_bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/widget_temp"
-        android:text="--°C"
-        android:textSize="34sp"
+        android:text="@string/empty_value"
+        android:textSize="18sp"
         android:gravity="center"
-        android:fontFamily="@font/smooch_sans_semi_bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/widget_temp_desc"
+        android:text="@string/empty_value"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/widget_refresh"
-        android:text="Actualizar"
-        android:textSize="24sp"
-        android:fontFamily="@font/smooch_sans_extra_bold"
+        android:text="@string/update"
+        android:textSize="18sp"
+        android:paddingHorizontal="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        android:background="@drawable/fast_search_button" />
 
 </LinearLayout>

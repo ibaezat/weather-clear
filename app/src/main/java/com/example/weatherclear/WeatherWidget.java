@@ -41,14 +41,15 @@ public class WeatherWidget extends AppWidgetProvider {
         views.setTextViewText(R.id.widget_temp, "...");
         views.setTextViewText(R.id.widget_temp_desc, "...");
 
-        Intent intent = new Intent(context, WeatherWidget.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-        views.setOnClickPendingIntent(R.id.widget_refresh, pendingIntent);
+        Intent openAppIntent = new Intent(context, CityWeather.class);
+        openAppIntent.putExtra("android.intent.extra.TEXT", city);
+        PendingIntent openAppPendingIntent = PendingIntent.getActivity(
+                context,
+                appWidgetId,
+                openAppIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+        views.setOnClickPendingIntent(R.id.widget_refresh, openAppPendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
 

@@ -1,37 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@drawable/search_city_style"
-    android:padding="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_component"
+    android:orientation="horizontal"
+    android:background="@drawable/widget_background"
+    android:clipToOutline="true"
+    android:paddingStart="-75dp"
+    android:gravity="center_vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="90dp">
 
-    <TextView
-        android:id="@+id/widget_city"
-        android:text="Ciudad"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:fontFamily="@font/smooch_sans_extra_bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/widget_icon"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_weight="10"
+        android:src="@drawable/soleado"
+        android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/widget_temp"
-        android:text="--°C"
-        android:textSize="34sp"
-        android:gravity="center"
-        android:fontFamily="@font/smooch_sans_semi_bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/widget_refresh"
-        android:text="Actualizar"
-        android:textSize="24sp"
-        android:fontFamily="@font/smooch_sans_extra_bold"
-        android:layout_width="wrap_content"
+        android:text="15°C"
+        android:textSize="45sp"
+        android:layout_width="0dp"
+        android:layout_weight="15"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="20"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/location_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/location_icon"/>
+
+            <TextView
+                android:id="@+id/widget_city"
+                android:text="VALPARAISO"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/widget_description"
+            android:text="Nubes"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -93,4 +93,60 @@ public class Utils {
         }
     }
 
+    public static String getNormalizedIcon(String icon) {
+        String result = "";
+        switch (icon) {
+            case "01d":
+            case "01n":
+                result = "soleado";
+                break;
+            case "02d":
+            case "02n":
+                result = "nubes_con_sol";
+                break;
+            case "50n":
+            case "50d":
+                result = "neblina";
+                break;
+            case "11n":
+            case "11d":
+                result = "rayos";
+                break;
+            case "03n":
+            case "03d":
+            case "04n":
+            case "04d":
+                result = "nublado";
+                break;
+            case "09n":
+            case "09d":
+                result = "lluvia";
+                break;
+            case "10n":
+            case "10d":
+                result = "lluvia_con_sol";
+                break;
+            case "13n":
+            case "13d":
+                result = "nieve";
+                break;
+            default:
+                result = "a" + icon;
+        }
+
+        return result;
+    }
+
+    public static String capitalizeFirstLetter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        str = str.trim();
+        if (str.length() == 1) {
+            return str.toUpperCase();
+        }
+        return str.substring(0, 1).toUpperCase()
+                + str.substring(1).toLowerCase();
+    }
+
 }

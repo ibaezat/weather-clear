@@ -1,11 +1,15 @@
 package com.example.weatherclear;
 
 import static com.example.weatherclear.utils.Utils.getWeatherMainString;
+import static com.example.weatherclear.utils.Utils.getNormalizedIcon;
 
 import android.annotation.SuppressLint;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,7 +40,6 @@ import org.json.JSONObject;
 public class CityWeather extends AppCompatActivity {
 
     // TODO: Improve and Optimize Code
-    // TODO: I need a design for Widget
 
     QuickSearchManager quickSearch;
     Button addToQuickSearch;
@@ -44,6 +47,10 @@ public class CityWeather extends AppCompatActivity {
     ImageView iFirstDay;
     ImageView iSecondDay;
     ImageView iThirdDay;
+    private String currentCityName;
+    private String currentTemperature;
+    private String currentIconName;
+    private String currentDescription;
 
     String apiKey = BuildConfig.WEATHER_API_KEY;
 
@@ -86,6 +93,34 @@ public class CityWeather extends AppCompatActivity {
                 finish();
             }
         });
+
+        ImageButton addCityToWidget = findViewById(R.id.add_city_to_widget);
+
+        QuickSearchManager.WidgetData widgetData = quickSearch.getWidgetData();
+
+        if (city != null && widgetData.city.equals(city.toUpperCase())) {
+            addCityToWidget.setImageResource(R.drawable.check);
+        }
+
+        addCityToWidget.setOnClickListener(v -> {
+            if (currentCityName != null && currentTemperature != null) {
+                quickSearch.setWidgetData(currentCityName, currentTemperature, currentIconName, currentDescription);
+                Toast.makeText(this, this.getString(R.string.city_added_to_widget) + " " + currentCityName, Toast.LENGTH_SHORT).show();
+
+                Intent widget_intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                ComponentName widgetComponent = new ComponentName(this, WeatherWidget.class);
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+                int[] ids = appWidgetManager.getAppWidgetIds(widgetComponent);
+                widget_intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                sendBroadcast(widget_intent);
+
+                addCityToWidget.setImageResource(R.drawable.check);
+
+            } else {
+                Toast.makeText(this, R.string.await_for_information, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
@@ -212,12 +247,23 @@ public class CityWeather extends AppCompatActivity {
         double temp = main.getDouble("temp");
         double tempMax = main.getDouble("temp_max");
         double tempMin = main.getDouble("temp_min");
+        String icon = weather.getString("icon");
+
+        String city = cityName.toUpperCase();
+        String temperature = String.valueOf(temp);
+        String iconName = getNormalizedIcon(icon);
+        String description = getWeatherMainString(CityWeather.this, weather.getString("main"));
+
+        currentCityName = city;
+        currentTemperature = temperature;
+        currentIconName = iconName;
+        currentDescription = description;
 
         textViewCityName.setText(cityName.toUpperCase());
         textViewTemp.setText(((int) temp) + "°");
         textCurrentMinAndMax.setText(getMinAndMaxLabel(tempMax, tempMin));
-        layout.setBackgroundResource(getBackgroundIdBasedOnIcon(weather.getString("icon")));
-        textViewWeather.setText(getWeatherMainString(CityWeather.this, weather.getString("main")));
+        layout.setBackgroundResource(getBackgroundIdBasedOnIcon(icon));
+        textViewWeather.setText(description);
     }
 
     private String getMinAndMaxLabel(double tempMax, double tempMin){
@@ -325,59 +371,6 @@ public class CityWeather extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
-    }
-
-    private String getNormalizedIcon(String icon) {
-        System.out.print(icon);
-        String result = "";
-        switch (icon) {
-            case "01d":
-            case "01n":
-                result = "soleado";
-                break;
-            case "02d":
-            case "02n":
-                result = "nubes_con_sol";
-                break;
-            case "50n":
-            case "50d":
-                result = "neblina";
-                break;
-            case "11n":
-            case "11d":
-                result = "rayos";
-                break;
-            case "03n":
-            case "03d":
-            case "04n":
-            case "04d":
-                result = "nublado";
-                break;
-            case "09n":
-            case "09d":
-                result = "lluvia";
-                break;
-            case "10n":
-            case "10d":
-                result = "lluvia_con_sol";
-                break;
-            case "13n":
-            case "13d":
-                result = "lluvia_con_sol";
-                break;
-            default:
-                result = "a" + icon;
-        }
-
-        return result;
-    }
-
-    public static String truncateTemp(String value, int length) {
-        int length2 = value.length() == 5 ? length : length - 1;
-        if (value.length() > length2) {
-            return value.substring(0, length2);
-        }
-        return value;
     }
 
     String getDayOfTheWeek(String dt) throws NumberFormatException {

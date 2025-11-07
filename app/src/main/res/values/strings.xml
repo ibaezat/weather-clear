@@ -98,5 +98,7 @@
     <string name="add_city_slot">+ Add</string>
     <string name="use_current_location">USE CURRENT LOCATION</string>
     <string name="update">Update</string>
+    <string name="city_added_to_widget">City added to widget:</string>
+    <string name="await_for_information">Please wait while the weather information loads.</string>
     <string name="open">Open</string>
 </resources>

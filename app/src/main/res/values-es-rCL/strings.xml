@@ -91,6 +91,8 @@
     <string name="add_city_slot">+ Agregar</string>
     <string name="use_current_location">USAR UBICACIÓN ACTUAL</string>
     <string name="update">Actualizar</string>
+    <string name="city_added_to_widget">Ciudad agregada al widget:</string>
+    <string name="await_for_information">Espere mientras la información del clima carga.</string>
     <string name="open">Abrir</string>
 
 </resources>

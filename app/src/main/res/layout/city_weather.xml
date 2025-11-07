@@ -73,12 +73,26 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/currentMinAndMax"
         android:layout_centerInParent="true"/>
+
+    <ImageButton
+        android:id="@+id/add_city_to_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/weather_card_bg"
+        android:src="@drawable/add_to_widget"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/weather"/>
+
     <LinearLayout
         android:id="@+id/forecast_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/weather"
-        android:layout_marginTop="60dp"
+        android:layout_below="@+id/add_city_to_widget"
         android:layout_marginHorizontal="10dp"
         android:gravity="center"
         android:orientation="horizontal"

@@ -1,6 +1,8 @@
 package com.example.weatherclear;
 
+import static com.example.weatherclear.utils.Utils.capitalizeFirstLetter;
 import static com.example.weatherclear.utils.Utils.getWeatherMainString;
+import static com.example.weatherclear.utils.Utils.getNormalizedIcon;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -36,25 +38,28 @@ public class WeatherWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_weather);
         QuickSearchManager quickSearchManager = new QuickSearchManager(context);
 
-        String city = quickSearchManager.getLastSearch();
-        views.setTextViewText(R.id.widget_city, city);
-        views.setTextViewText(R.id.widget_temp, "...");
-        views.setTextViewText(R.id.widget_temp_desc, "...");
+        QuickSearchManager.WidgetData widgetData = quickSearchManager.getWidgetData();
+
+        views.setTextViewText(R.id.widget_city, capitalizeFirstLetter(widgetData.city));
+        views.setTextViewText(R.id.widget_temp, widgetData.temperature);
+        views.setTextViewText(R.id.widget_description, widgetData.description);
+        views.setImageViewResource(R.id.widget_icon, context.getResources().getIdentifier(widgetData.iconName, "drawable", context.getPackageName()));
 
         Intent openAppIntent = new Intent(context, CityWeather.class);
-        openAppIntent.putExtra("android.intent.extra.TEXT", city);
+        openAppIntent.putExtra("android.intent.extra.TEXT", widgetData.city);
         PendingIntent openAppPendingIntent = PendingIntent.getActivity(
                 context,
                 appWidgetId,
                 openAppIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
-        views.setOnClickPendingIntent(R.id.widget_refresh, openAppPendingIntent);
+
+        views.setOnClickPendingIntent(R.id.widget_component, openAppPendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
 
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",CL&appid=" + API_KEY + "&units=metric";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + widgetData.city + ",CL&appid=" + API_KEY + "&units=metric";
         RequestQueue queue = Volley.newRequestQueue(context);
 
         StringRequest stringRequest = new StringRequest(0, url,
@@ -66,12 +71,16 @@ public class WeatherWidget extends AppWidgetProvider {
                             JSONObject main = responseJSON.getJSONObject("main");
                             JSONArray weatherArray = responseJSON.getJSONArray("weather");
                             JSONObject weather = weatherArray.getJSONObject(0);
+                            String icon = weather.getString("icon");
 
                             double temp = main.getDouble("temp");
                             String tempText = ((int) temp) + "°C";
 
+                            views.setTextViewText(R.id.widget_city, capitalizeFirstLetter(widgetData.city));
                             views.setTextViewText(R.id.widget_temp, tempText);
-                            views.setTextViewText(R.id.widget_temp_desc, getWeatherMainString(context, weather.getString("main")));
+                            views.setTextViewText(R.id.widget_description, getWeatherMainString(context, weather.getString("main")));
+                            views.setImageViewResource(R.id.widget_icon, context.getResources().getIdentifier(getNormalizedIcon(icon), "drawable", context.getPackageName()));
+
                             appWidgetManager.updateAppWidget(appWidgetId, views);
 
                         } catch (JSONException e) {

@@ -1,58 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_component"
     android:orientation="horizontal"
-    android:background="@drawable/search_city_style"
-    android:paddingVertical="8dp"
-    android:paddingEnd="8dp"
-    android:paddingStart="20dp"
+    android:background="@drawable/widget_background"
+    android:clipToOutline="true"
+    android:paddingStart="-75dp"
     android:gravity="center_vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="90dp">
 
-    <TextView
-        android:id="@+id/widget_city"
-        android:text="@string/empty_value"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center_vertical"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white" />
+    <ImageView
+        android:id="@+id/widget_icon"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_weight="10"
+        android:src="@drawable/soleado"
+        android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/widget_temp"
-        android:text="@string/empty_value"
-        android:textSize="18sp"
-        android:gravity="center"
+        android:text="15°C"
+        android:textSize="45sp"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="15"
         android:layout_height="wrap_content"
         android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/widget_temp_desc"
-        android:text="@string/empty_value"
-        android:textSize="18sp"
-        android:gravity="center"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white" />
+        android:layout_weight="20"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/widget_refresh"
-        android:text="@string/open"
-        android:textSize="18sp"
-        android:paddingHorizontal="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        app:backgroundTint="@null"
-        android:background="@drawable/fast_search_button" />
+            <ImageView
+                android:id="@+id/location_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/location_icon"/>
+
+            <TextView
+                android:id="@+id/widget_city"
+                android:text="VALPARAISO"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/widget_description"
+            android:text="Nubes"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
 
 </LinearLayout>

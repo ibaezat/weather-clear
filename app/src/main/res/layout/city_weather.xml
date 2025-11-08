@@ -6,21 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnAddQuickSearch"
+    <ImageButton
+        android:id="@+id/add_city_to_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/empty_value"
-        android:drawableEnd="@drawable/add"
-        android:textColor="@color/white"
+        android:padding="10dp"
         android:background="@drawable/fast_search_button"
-        app:backgroundTint="@null"
+        android:src="@drawable/icon_remove_favorite"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/smooch_sans_regular"
-        android:textSize="20sp"/>
+        android:layout_marginEnd="8dp" />
+
+    <ImageButton
+        android:id="@+id/add_city_to_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/fast_search_button"
+        android:src="@drawable/add_to_widget"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:textSize="50sp"
@@ -74,26 +82,13 @@
         android:layout_below="@+id/currentMinAndMax"
         android:layout_centerInParent="true"/>
 
-    <ImageButton
-        android:id="@+id/add_city_to_widget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/add_to_widget_button_background"
-        android:src="@drawable/add_to_widget"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/weather"/>
-
     <LinearLayout
         android:id="@+id/forecast_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/add_city_to_widget"
+        android:layout_below="@+id/weather"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="3">

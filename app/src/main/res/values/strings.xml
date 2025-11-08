@@ -87,7 +87,6 @@
     <string name="chile">CHILE</string>
     <string name="version_number">version 2.3.1</string>
     <string name="quick_search">Quick Search</string>
-    <string name="add_to_main_screen">Add to Quick Search</string>
     <string name="remove_from_main_screen">Remove from Quick Search</string>
     <string name="city_added_to_quick_search">City added to Quick Search</string>
     <string name="city_was_not_added_to_quick_search">City was not added to Quick Search</string>

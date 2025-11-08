@@ -8,7 +8,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -38,20 +37,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CityWeather extends AppCompatActivity {
-
     // TODO: Improve and Optimize Code
-
     QuickSearchManager quickSearch;
-    Button addToQuickSearch;
-    TextView currentCity;
-    ImageView iFirstDay;
-    ImageView iSecondDay;
-    ImageView iThirdDay;
+    ImageButton addCityToFavoritesButton;
     private String currentCityName;
     private String currentTemperature;
     private String currentIconName;
     private String currentDescription;
-
     String apiKey = BuildConfig.WEATHER_API_KEY;
 
     @Override
@@ -62,14 +54,10 @@ public class CityWeather extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
 
-        quickSearch = new QuickSearchManager(this);
         setContentView(R.layout.city_weather);
 
-        this.addToQuickSearch = findViewById(R.id.btnAddQuickSearch);
-        this.currentCity = findViewById(R.id.cityName);
-        this.iFirstDay = findViewById(R.id.iconFirstDay);
-        this.iSecondDay = findViewById(R.id.iconSecondDay);
-        this.iThirdDay = findViewById(R.id.iconThirdDay);
+        quickSearch = new QuickSearchManager(this);
+        this.addCityToFavoritesButton = findViewById(R.id.add_city_to_favorites);
 
         Intent intent = getIntent();
         String city = intent.getStringExtra("android.intent.extra.TEXT");
@@ -99,8 +87,7 @@ public class CityWeather extends AppCompatActivity {
         QuickSearchManager.WidgetData widgetData = quickSearch.getWidgetData();
 
         if (city != null && widgetData.city.equals(city.toUpperCase())) {
-            addCityToWidget.setImageResource(R.drawable.check);
-            addCityToWidget.setBackgroundResource(R.drawable.added_to_widget_button_background);
+            addCityToWidget.setImageResource(R.drawable.icon_check);
         }
 
         addCityToWidget.setOnClickListener(v -> {
@@ -115,8 +102,7 @@ public class CityWeather extends AppCompatActivity {
                 widget_intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
                 sendBroadcast(widget_intent);
 
-                addCityToWidget.setImageResource(R.drawable.check);
-                addCityToWidget.setBackgroundResource(R.drawable.added_to_widget_button_background);
+                addCityToWidget.setImageResource(R.drawable.icon_check);
 
             } else {
                 Toast.makeText(this, R.string.await_for_information, Toast.LENGTH_SHORT).show();
@@ -187,10 +173,8 @@ public class CityWeather extends AppCompatActivity {
 
     private void configureQuickSearchButton(String cityName) {
         if (quickSearch.hasCity(cityName)) {
-            addToQuickSearch.setText(R.string.remove_from_main_screen);
-            addToQuickSearch.setCompoundDrawablesWithIntrinsicBounds(
-                    0, 0, R.drawable.trash, 0);
-            addToQuickSearch.setOnClickListener(v -> {
+            addCityToFavoritesButton.setImageResource(R.drawable.icon_remove_favorite);
+            addCityToFavoritesButton.setOnClickListener(v -> {
                 boolean removed = quickSearch.removeCity(cityName);
                 int toastTextId = removed ?
                         R.string.city_removed_from_quick_search :
@@ -200,10 +184,8 @@ public class CityWeather extends AppCompatActivity {
                 configureQuickSearchButton(cityName);
             });
         } else {
-            addToQuickSearch.setText(R.string.add_to_main_screen);
-            addToQuickSearch.setCompoundDrawablesWithIntrinsicBounds(
-                    0, 0, R.drawable.add, 0);
-            addToQuickSearch.setOnClickListener(v -> {
+            addCityToFavoritesButton.setImageResource(R.drawable.icon_add_favorite);
+            addCityToFavoritesButton.setOnClickListener(v -> {
                 boolean added = quickSearch.addCity(cityName);
                 int toastTextId = added ?
                         R.string.city_added_to_quick_search :
@@ -252,7 +234,7 @@ public class CityWeather extends AppCompatActivity {
         String icon = weather.getString("icon");
 
         String city = cityName.toUpperCase();
-        String temperature = String.valueOf(temp);
+        String temperature = ((int) temp) + "°C";
         String iconName = getNormalizedIcon(icon);
         String description = getWeatherMainString(CityWeather.this, weather.getString("main"));
 
@@ -280,8 +262,12 @@ public class CityWeather extends AppCompatActivity {
     }
 
     public void forecast(String lat, String lon) {
-        final TextView textViewTemperaturesFirstDay = (TextView) findViewById(R.id.temperatureFirstDay);
-        final TextView textViewFirstDay = (TextView) findViewById(R.id.firstDay);
+        final ImageView iFirstDay = findViewById(R.id.iconFirstDay);
+        final ImageView iSecondDay = findViewById(R.id.iconSecondDay);
+        final ImageView iThirdDay = findViewById(R.id.iconThirdDay);
+
+        final TextView textViewTemperaturesFirstDay = findViewById(R.id.temperatureFirstDay);
+        final TextView textViewFirstDay = findViewById(R.id.firstDay);
         final TextView textViewTemperaturesSecondDay = (TextView) findViewById(R.id.temperatureSecondDay);
         final TextView textViewSecondDay = (TextView) findViewById(R.id.secondDay);
         final TextView textViewTemperaturesThirdDay = (TextView) findViewById(R.id.temperatureThirdDay);

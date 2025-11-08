@@ -16,5 +16,6 @@ Aplicación para revisar el pronóstico del clima usando la estética de Minecra
 ## Clima
 <img width="406" height="856" alt="image" src="https://github.com/user-attachments/assets/ee4ccdc7-ba58-4cbb-abf7-1b4dbc82ae64" />
 
+## Widget
+<img width="406" height="858" alt="image" src="https://github.com/user-attachments/assets/b7dfb059-8d2e-48c6-8eb8-77a91cf0aa80" />
 
-  

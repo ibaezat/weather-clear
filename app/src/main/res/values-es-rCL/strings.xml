@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="version_number">versión 2.3.2</string>
     <string name="app_name">Weather Clear</string>
     <string name="ok">Aceptar</string>
     <string name="search">Buscar...</string>
@@ -78,7 +79,6 @@
     <string name="thunderstorm_with_heavy_drizzle">Tormenta con llovizna intensa</string>
     <string name="app_title">WEATHER CLEAR</string>
     <string name="chile">CHILE</string>
-    <string name="version_number">versión 2.3.1</string>
     <string name="quick_search">Búsqueda Rápida</string>
     <string name="remove_from_main_screen">Eliminar del Inicio</string>
     <string name="city_added_to_quick_search">Ciudad agregada al Inicio</string>

@@ -1,5 +1,6 @@
 package com.example.weatherclear;
 
+import static com.example.weatherclear.utils.Utils.capitalizeFirstLetter;
 import static com.example.weatherclear.utils.Utils.getWeatherMainString;
 import static com.example.weatherclear.utils.Utils.getNormalizedIcon;
 
@@ -93,7 +94,7 @@ public class CityWeather extends AppCompatActivity {
         addCityToWidget.setOnClickListener(v -> {
             if (currentCityName != null && currentTemperature != null) {
                 quickSearch.setWidgetData(currentCityName, currentTemperature, currentIconName, currentDescription);
-                Toast.makeText(this, this.getString(R.string.city_added_to_widget) + " " + currentCityName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, this.getString(R.string.city_added_to_widget) + " " + capitalizeFirstLetter(currentCityName), Toast.LENGTH_SHORT).show();
 
                 Intent widget_intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
                 ComponentName widgetComponent = new ComponentName(this, WeatherWidget.class);

@@ -10,9 +10,11 @@ Aplicación para revisar el pronóstico del clima usando la estética de Minecra
 - La aplicación está disponible en dos idiomas: Inglés y Español. Se adapta al idioma de tu celular.
 
 ## Menú Principal
-<img width="413" height="857" alt="image" src="https://github.com/user-attachments/assets/cdf23470-4069-4096-83bb-d3009db5cf1c" />
+<img width="403" height="854" alt="image" src="https://github.com/user-attachments/assets/04f7e13a-d545-4b3f-9855-e798aa4cbc7d" />
+
 
 ## Clima
-<img width="403" height="854" alt="image" src="https://github.com/user-attachments/assets/d8a07a8e-4385-4576-9109-0e71824735f8" />
+<img width="406" height="856" alt="image" src="https://github.com/user-attachments/assets/ee4ccdc7-ba58-4cbb-abf7-1b4dbc82ae64" />
+
 
   

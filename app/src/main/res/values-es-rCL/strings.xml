@@ -80,7 +80,6 @@
     <string name="chile">CHILE</string>
     <string name="version_number">versión 2.3.1</string>
     <string name="quick_search">Búsqueda Rápida</string>
-    <string name="add_to_main_screen">Agregar al Inicio</string>
     <string name="remove_from_main_screen">Eliminar del Inicio</string>
     <string name="city_added_to_quick_search">Ciudad agregada al Inicio</string>
     <string name="city_was_not_added_to_quick_search">La ciudad no fue agregada al Inicio</string>

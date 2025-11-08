@@ -100,6 +100,7 @@ public class CityWeather extends AppCompatActivity {
 
         if (city != null && widgetData.city.equals(city.toUpperCase())) {
             addCityToWidget.setImageResource(R.drawable.check);
+            addCityToWidget.setBackgroundResource(R.drawable.added_to_widget_button_background);
         }
 
         addCityToWidget.setOnClickListener(v -> {
@@ -115,6 +116,7 @@ public class CityWeather extends AppCompatActivity {
                 sendBroadcast(widget_intent);
 
                 addCityToWidget.setImageResource(R.drawable.check);
+                addCityToWidget.setBackgroundResource(R.drawable.added_to_widget_button_background);
 
             } else {
                 Toast.makeText(this, R.string.await_for_information, Toast.LENGTH_SHORT).show();

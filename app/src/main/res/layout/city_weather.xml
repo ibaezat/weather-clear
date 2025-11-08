@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:background="@drawable/weather_card_bg"
+        android:background="@drawable/add_to_widget_button_background"
         android:src="@drawable/add_to_widget"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

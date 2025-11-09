@@ -79,12 +79,11 @@
     <string name="thunderstorm_with_heavy_drizzle">Tormenta con llovizna intensa</string>
     <string name="app_title">WEATHER CLEAR</string>
     <string name="chile">CHILE</string>
-    <string name="quick_search">Búsqueda Rápida</string>
-    <string name="remove_from_main_screen">Eliminar del Inicio</string>
-    <string name="city_added_to_quick_search">Ciudad agregada al Inicio</string>
-    <string name="city_was_not_added_to_quick_search">La ciudad no fue agregada al Inicio</string>
-    <string name="city_removed_from_quick_search">Ciudad eliiminada del Inicio</string>
-    <string name="city_was_not_removed_from_quick_search">La ciudad no fue eliminada del Inicio</string>
+    <string name="favorites">Favoritos</string>
+    <string name="city_added_to_favorites">Ciudad agregada a Favoritos</string>
+    <string name="city_was_not_added_to_favorites">La ciudad no fue agregada a Favoritos</string>
+    <string name="city_removed_from_favorites">Ciudad eliminada de Favoritos</string>
+    <string name="city_was_not_removed_from_favorites">La ciudad no fue eliminada de Favoritos</string>
     <string name="gps_not_working">Tu GPS no funciona correctamente</string>
     <string name="empty_value">-</string>
     <string name="add_city_slot">+ Agregar</string>

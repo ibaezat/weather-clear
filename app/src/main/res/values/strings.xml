@@ -86,12 +86,11 @@
     <string name="thunderstorm_with_heavy_drizzle">Thunderstorm with heavy drizzle</string>
     <string name="app_title">WEATHER CLEAR</string>
     <string name="chile">CHILE</string>
-    <string name="quick_search">Quick Search</string>
-    <string name="remove_from_main_screen">Remove from Quick Search</string>
-    <string name="city_added_to_quick_search">City added to Quick Search</string>
-    <string name="city_was_not_added_to_quick_search">City was not added to Quick Search</string>
-    <string name="city_removed_from_quick_search">City removed from Quick Search</string>
-    <string name="city_was_not_removed_from_quick_search">City was not removed from Quick Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="city_added_to_favorites">City added to Favorites</string>
+    <string name="city_was_not_added_to_favorites">City was not added to Favorites</string>
+    <string name="city_removed_from_favorites">City removed from Favorites</string>
+    <string name="city_was_not_removed_from_favorites">City was not removed from Favorites</string>
     <string name="gps_not_working">Your GPS is not working</string>
     <string name="empty_value">-</string>
     <string name="add_city_slot">+ Add</string>

@@ -178,8 +178,8 @@ public class CityWeather extends AppCompatActivity {
             addCityToFavoritesButton.setOnClickListener(v -> {
                 boolean removed = quickSearch.removeCity(cityName);
                 int toastTextId = removed ?
-                        R.string.city_removed_from_quick_search :
-                        R.string.city_was_not_removed_from_quick_search;
+                        R.string.city_removed_from_favorites :
+                        R.string.city_was_not_removed_from_favorites;
                 Toast.makeText(this, toastTextId, Toast.LENGTH_SHORT).show();
 
                 configureQuickSearchButton(cityName);
@@ -189,8 +189,8 @@ public class CityWeather extends AppCompatActivity {
             addCityToFavoritesButton.setOnClickListener(v -> {
                 boolean added = quickSearch.addCity(cityName);
                 int toastTextId = added ?
-                        R.string.city_added_to_quick_search :
-                        R.string.city_was_not_added_to_quick_search;
+                        R.string.city_added_to_favorites :
+                        R.string.city_was_not_added_to_favorites;
                 Toast.makeText(this, toastTextId, Toast.LENGTH_SHORT).show();
 
                 configureQuickSearchButton(cityName);

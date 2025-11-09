@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="16dp" />
 
     <ImageButton
         android:id="@+id/add_city_to_widget"
@@ -24,11 +24,12 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@drawable/fast_search_button"
-        android:src="@drawable/add_to_widget"
+        android:src="@drawable/icon_add_to_widget"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/add_city_to_favorites"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="8dp" />
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:textSize="50sp"
